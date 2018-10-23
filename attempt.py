@@ -18,10 +18,10 @@ address = ("https://a127-jobs.nyc.gov/psc/nycjobs/EMPLOYEE/HRMS/c"
           "=U&FOCUS=Applicant&SiteId=1&JobOpeningId={}&PostingSeq=1")
 # address is for generating the permalinks using job id
 
-entry = re.compile(r"Display details of (.+) -"
-                    "(\d\d\d\d\d\d).+<b>Department:</b>(.+)\s+ \|")
-# entry = re.compile(r"Display details of (.+) - (\d\d\d\d\d\d)")
-# the job description always includes this tag in the HTML
+reg_ex = (r"Display details of (.+\s)- (\d\d\d\d\d\d)'.+\n.+<b>Department:</b>"
+          r"(.*?\s)\s+\|.+<b>Agency:</b>\s(.*?\s)\s+\|")
+
+entry = re.compile(reg_ex)
 
 for site in all_sites:
     """this iterates through the categories, fetches the HTML, uses the regex
@@ -31,9 +31,10 @@ for site in all_sites:
     jobs = re.findall(entry, full_page.text)
     with open('./jobs.csv','w') as out:
         outwrite = csv.writer(out)
-        for title, number, department in jobs:
-            location = title.find('-')
+        for title, number, department, agency in jobs:
+            dash = title.find('-')
+            office = agency + ": " + department
             permalink = address.format(number)
-            outwrite.writerow([site, department, number, title[:location],
+            outwrite.writerow([site, office, number, title[:dash],
                                permalink])
     time.sleep(5)

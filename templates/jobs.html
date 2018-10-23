@@ -1,0 +1,6 @@
+<h1>Currently Listed NYC Jobs: </h1>
+<ul>
+    {% for job in jobs %}
+    <li>{{ job[title] }}, {{ job[office] }}, <a href={{ job[link] }}>{{job[id]}}</a></li>
+    {% endfor %}
+</ul>

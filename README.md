@@ -8,3 +8,4 @@
 * Need to read up on jinja templates
 * Also need to make the flask app load the .json
 
+* Is it only fetching the first page of results?

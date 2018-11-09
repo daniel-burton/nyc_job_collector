@@ -1,4 +1,4 @@
-import re, time, requests, json
+import re, time, requests, json, datetime
 
 all_sites = ['cas', 'cig', 'fap', 'itt', 'poa', 'soc', 'cbs', 'eap', 'hlt',
              'leg', 'mop', 'psi']
@@ -31,6 +31,8 @@ address = ("https://a127-jobs.nyc.gov/psc/nycjobs/EMPLOYEE/HRMS/c"
 
 reg_ex = (r"Display details of (.+\s)- (\d\d\d\d\d\d)'.+\n.+<b>Department:</b>"
           r"(.*?\s)\s+\|.+<b>Agency:</b>\s(.*?\s)\s+\|")
+# this regex finds the places in the HTML where job title, agency,
+# department and identifier are listed
 
 entry = re.compile(reg_ex)
 
@@ -44,8 +46,9 @@ for site in all_sites:
     jobs = re.findall(entry, full_page.text)
     for title, number, department, agency in jobs:
         dash = title.find('-')
+        #find location of the dash in the job title, to separate title from #
         permalink = address.format(number)
-        job_entry = {"title": title[: dash], "number": number,
+        job_entry = {"title": title[: dash], "id": number,
                      "department": department, "agency": agency,
                      "category":category[site], "link": permalink}
         jobs_list.append(job_entry)

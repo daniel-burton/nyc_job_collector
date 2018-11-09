@@ -1,6 +1,45 @@
-<h1>Currently Listed NYC Jobs: </h1>
-<ul>
-    {% for job in jobs %}
-    <li>{{ job[title] }}, {{ job[office] }}, <a href={{ job[link] }}>{{job[id]}}</a></li>
-    {% endfor %}
-</ul>
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>NYC Jobs</title>
+        <style>
+            table {
+                border-collapse: collapse;
+            }
+
+            table, th, td {
+                border: 1px solid black;
+                border-collapse: collapse;
+            }                           
+  </style>
+
+    </head>
+    <body>
+        <h1><p>Currently Listed NYC Jobs. Refreshed daily.</p>
+        <p>
+        Only incomplete listings, use with caution.</p></h1>
+        <ul>
+            <table style="width:90%">
+            <tr>
+            <th>Title</th>
+            <th>Agency</th>
+            <th>Department</th>
+            <th>Permalink</th>
+            </tr>
+            {% for job in jobs %}
+                <tr>
+                <td>{{job['title']}}</td> 
+                <td> {{job['agency']}}</td>
+                <td>{{job['department']}}</td>
+                <td><a href={{job['link']}}>{{job['id']}}</a></td>
+                </tr>
+            {% endfor %}
+            </table>
+        </ul>
+        <footer>
+            <p>Created by Daniel Burton</p>
+            <a href="mailto:daniel.r.burton@gmail.com">daniel.r.burton@gmail.com</a></p>
+            <p> <a href="https://github.com/daniel-burton/nyc_job_collector">Check out the scraper on github!</a></p>
+        </footer>
+    </body>
+</html>

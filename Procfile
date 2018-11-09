@@ -1,1 +1,1 @@
-web: gunicorn site.py
+web: python3 site.py 

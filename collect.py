@@ -54,6 +54,7 @@ for site in all_sites:
         jobs_list.append(job_entry)
     time.sleep(5)
 
+jobs_list = sorted(jobs_list, key=lambda k: k['department'])
 with open("jobs.json", "w") as fp:
     json.dump(jobs_list, fp, indent=4)
 

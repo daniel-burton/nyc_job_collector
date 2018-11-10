@@ -1,1 +1,1 @@
-web: python -m flask run 
+web: python3 collect.py;export FLASK_APP=site.py; python3 -m flask run 

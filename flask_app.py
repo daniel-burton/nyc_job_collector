@@ -6,7 +6,7 @@ app = Flask(__name__)
 
 
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def jobs_route():
     with open("jobs.json","r") as job_file:
         jobs_data = json.loads(job_file.read())

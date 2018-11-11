@@ -2,6 +2,8 @@ import re, time, requests, json, datetime
 
 
 def scraper():
+    with open("job_log.txt","w") as job_log:
+        job_log.write(str(datetime.datetime.now()))
     all_sites = ['cas', 'cig', 'fap', 'itt', 'poa', 'soc', 'cbs', 'eap', 'hlt',
                  'leg', 'mop', 'psi']
     # the list of job categories

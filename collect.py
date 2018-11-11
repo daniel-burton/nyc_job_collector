@@ -2,8 +2,6 @@ import re, time, requests, json, datetime
 
 
 def scraper():
-    with open("job_log.txt","w") as job_log:
-        job_log.write(str(datetime.datetime.now()))
     all_sites = ['cas', 'cig', 'fap', 'itt', 'poa', 'soc', 'cbs', 'eap', 'hlt',
                  'leg', 'mop', 'psi']
     # the list of job categories
@@ -54,11 +52,14 @@ def scraper():
                          "department": department, "agency": agency,
                          "category":category[site], "link": permalink}
             jobs_list.append(job_entry)
-        time.sleep(5)
+        time.sleep(4)
 
     jobs_list = sorted(jobs_list, key=lambda k: k['agency'])
-    with open("jobs.json", "w") as fp:
-        json.dump(jobs_list, fp, indent=4)
+    # with open("jobs.json", "w") as fp:
+        # json.dump(jobs_list, fp, indent=4)
+    return jobs_list
 
 if __name__ == "__main__":
-    scraper()
+    jobs = scraper()
+    with open("job_log.txt", "w") as log:
+        log.write(str(datetime.datetime.now()))

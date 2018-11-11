@@ -56,20 +56,9 @@ def scraper():
             jobs_list.append(job_entry)
         time.sleep(5)
 
-    jobs_list = sorted(jobs_list, key=lambda k: k['department'])
+    jobs_list = sorted(jobs_list, key=lambda k: k['agency'])
     with open("jobs.json", "w") as fp:
         json.dump(jobs_list, fp, indent=4)
 
 if __name__ == "__main__":
     scraper()
-
-# VERSION THAT USED CSV
-#    with open('./jobs.csv','w') as out:
-#        outwrite = csv.writer(out)
-#        for title, number, department, agency in jobs:
-#            dash = title.find('-')
-#            office = agency + ": " + department
-#            permalink = address.format(number)
-#            outwrite.writerow([site, office, number, title[:dash],
-#                               permalink])
-

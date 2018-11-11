@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import render_template
+import flask-sqlalchemy
 import json
 import collect
 

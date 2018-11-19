@@ -2,29 +2,25 @@
 <html>
     <head>
         <title>NYC Jobs</title>
-        <style>
-            h2 {
-                font-family:helvetica
-            }
-            table {
-                border-collapse: collapse;
-            }
-
-            table, th, td {
-                border: 1px solid black;
-                border-collapse: collapse;
-                font-family:arial
-            }                           
-  </style>
-
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href={{ url_for('static', filename='jobs.css') }}>
+        <script src="search.js"></script>
     </head>
     <body>
-        <h2><p>Currently Listed NYC Jobs. Refreshed hourly.</p>
-        <p>Jobs list last refreshed at {{updated}}.</p>
-        <p>
-        Use with caution! Only includes the most recently listed jobs.</p></h2>
+        <div id="header">
+        <h1>
+            <p>Currently Listed NYC Jobs. Refreshed hourly.</p>
+        </h1>
+        <h2>
+            <p>Jobs list last refreshed: {{updated}}.</p>
+            <p>Use with caution! Only includes the most recently listed jobs.</p>
+        </h2>
+        </div>
+        <div id="tablebody">
+        <input type="text" id="searchInput" onkeyup="searchFunction()" placeholder="Search for a job...">
+
         <ul>
-            <table style="width:90%">
+            <table>
             <tr>
             <th>Title</th>
             <th>Agency</th>
@@ -41,6 +37,7 @@
             {% endfor %}
             </table>
         </ul>
+        </div>
         <footer>
             <a href="mailto:daniel.r.burton@gmail.com">daniel.r.burton@gmail.com</a></p>
             <p> <a href="https://github.com/daniel-burton/nyc_job_collector">Check out the scraper on github!</a></p>
